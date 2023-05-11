@@ -16,3 +16,16 @@ export async function createAdminService(data) {
     throw error;
   }
 }
+
+export async function authAdminByQueryService(query) {
+  try {
+    const { phone_number, password } = Admin;
+    if (query.phone_number === phone_number && query.password === password) {
+      return Admin;
+    }
+    console.log(data);
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+}

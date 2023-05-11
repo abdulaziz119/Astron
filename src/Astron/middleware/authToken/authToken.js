@@ -1,12 +1,13 @@
-import { Types } from "mongoose";
-import { authUsersByQueryService } from "../../../common/service/users/users.service.js";
+import { authAdminByQueryService } from "../../../common/service/admin/admin.service.js";
 import jwt from "../../../common/utils/jwt.js";
 export default async function authToken(request, response, next) {
   try {
-    let usersId = jwt.verify(request.headers.token);
-    usersId._id = new Types.ObjectId(usersId._id);
-    const { _id } = usersId;
-    let users = await authUsersByQueryService({ _id: _id });
+    let { data } = jwt.verify(request.headers.token);
+    const query = {
+      phone_number: data.phone_number,
+      password: data.password,
+    };
+    let users = await authAdminByQueryService(query);
     if (!users) {
       throw new Error("user not found");
     }
