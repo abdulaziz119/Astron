@@ -4,7 +4,7 @@ import {AboutEntity} from "../../entity/about.entity";
 
 export const adminProviders = [
     {
-        provide: MODELS.ABOUT,
+        provide: MODELS.ADMIN,
         useFactory: (dataSource: DataSource) =>
             dataSource.getRepository(AboutEntity),
         inject: [ASTRON_SOURCE],
